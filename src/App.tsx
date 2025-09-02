@@ -11,10 +11,8 @@ function App() {
   const [countryFlagData, setCountryFlagData] = useState<DataType[][]>([])
 
   useEffect(() => {
-
-    try {
-
-      const fetchFlag = async () => {
+    const fetchFlag = async () => {
+      try {
         const response = await fetch('https://xcountries-backend.azurewebsites.net/all')
         const allFlagData: DataType[] = await response.json()
 
@@ -24,19 +22,26 @@ function App() {
           rows.push(allFlagData.slice(i, i + 7))
         }
         setCountryFlagData(rows)
+      } catch (error) {
+        console.error("Error fetching data:", error)
       }
-
-      fetchFlag()
-    } catch (error) {
-      console.error("Error fetching data: ",error)
     }
 
+    fetchFlag()
   }, [])
 
   return (
     <div>
       {countryFlagData.map((row, rowIndex) => (
-        <div key={rowIndex} style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '20px' }}>
+        <div 
+          key={rowIndex} 
+          style={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            gap: '10px', 
+            marginBottom: '20px' 
+          }}
+        >
           {row.map(({ name, flag }: DataType, index) => (
             <div key={index} style={{ textAlign: 'center' }}>
               <p>{name}</p>
