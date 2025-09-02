@@ -31,7 +31,7 @@ function App() {
     <div>
       {countryFlagData.map((row, rowIndex) => (
         <div key={rowIndex} style={{ display: 'flex', justifyContent : 'center', gap: '10px', marginBottom: '20px' }}>
-          {row.map(({ name, abbr, flag }: DataType, index) => (
+          {row.map(({ name, flag }: DataType, index) => (
             <div key={index} style={{ textAlign: 'center' }}>
               <p>{name}</p>
               <img src={flag} width={120} height={70} alt={name} />
